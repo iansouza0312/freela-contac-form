@@ -15,8 +15,8 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->words(5),
-            'description'=>fake()->randomHtml(),
+            'title' => collect(fake()->words(5))->join(' '),
+            'description'=>htmlspecialchars(fake()->randomHtml()),
             'ends_at'=> fake()->dateTimeBetween('now', '+ 3 days'),
             'status'=>fake()->randomElement(['opne', 'closed']),
             'tech_stack'=>fake()->randomElements(['react', 'php', 'springboot', 'python', 'rust', 'tailwindcss', 'nextjs'], random_int(1,5)),
