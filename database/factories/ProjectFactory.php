@@ -2,11 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
- */
 class ProjectFactory extends Factory
 {
     /**
@@ -17,7 +15,12 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => fake()->words(5),
+            'description'=>fake()->randomHtml(),
+            'ends_at'=> fake()->dateTimeBetween('now', '+ 3 days'),
+            'status'=>fake()->randomElement(['opne', 'closed']),
+            'tech_stack'=>fake()->randomElements(['react', 'php', 'springboot', 'python', 'rust', 'tailwindcss', 'nextjs'], random_int(1,5)),
+            'created_by'=> User::factory(),
         ];
     }
 }
